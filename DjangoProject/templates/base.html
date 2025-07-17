@@ -1,0 +1,28 @@
+<!-- base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}"/>
+</head>
+<body>
+    <header>
+        <h1>Магазин</h1>
+        <nav>
+            <a href="/">Главная</a>
+            <a href="{% url 'product_list' %}">Список товаров</a>
+            <a href="{% url 'add' %}">Добавить товар</a>
+            <a href="{% url 'add_category' %}">Добавить категорию</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        © {{ year }} Магазин
+    </footer>
+
+</body>
+</html>

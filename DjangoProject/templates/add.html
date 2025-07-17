@@ -1,0 +1,11 @@
+<!-- products/add.html -->
+{% extends 'base.html' %}
+{% block title %}Добавить продукт{% endblock %}
+{% block content %}
+    <h1>Добавление нового продукта</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Добавить</button>
+    </form>
+{% endblock %}

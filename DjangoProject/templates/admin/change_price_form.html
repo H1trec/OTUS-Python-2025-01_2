@@ -1,0 +1,49 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div style="margin: 20px;">
+    <h1>Изменение цен для {{ products.count }} товаров</h1>
+
+    <form method="post" style="margin-top: 20px;">
+        {% csrf_token %}
+
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse;">
+            <thead>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <th style="text-align: left; padding: 8px;">Товар</th>
+                    <th style="text-align: left; padding: 8px;">Текущая цена</th>
+                    <th style="text-align: left; padding: 8px;">Новая цена</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 8px;">{{ product.name }}</td>
+                    <td style="padding: 8px;">{{ product.price|floatformat:2 }}</td>
+                    <td style="padding: 8px;">
+                        <input type="number"
+                               name="price_{{ product.id }}"
+                               value="{{ product.price|floatformat:2 }}"
+                               step="0.01"
+                               min="0"
+                               style="padding: 5px; width: 100px;"
+                               required>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div>
+            <button type="submit" class="button" style="padding: 8px 15px; background: #417690; color: white; border: none; cursor: pointer;">
+                Сохранить изменения
+            </button>
+            <a href="{{ changelist_url }}"
+               class="button"
+               style="padding: 8px 15px; margin-left: 10px; background: #999; color: white; text-decoration: none; display: inline-block;">
+                Отмена
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
